@@ -3,6 +3,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -71,4 +73,41 @@ class RestaurantTest {
         assertThrows(ItemNotFoundException.class,
                 () -> restaurant.removeFromMenu("French fries"));
     }
+
+    @Test
+    public void calculate_order_total_with_valid_item_names_should_return_correct_total() throws ItemNotFoundException {
+        restaurant.addToMenu("Sweet corn soup", 119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+        restaurant.addToMenu("Sizzling brownie", 319);
+
+        List<String> itemNames = new ArrayList<>();
+        itemNames.add("Sweet corn soup");
+        itemNames.add("Sizzling brownie");
+
+        int total = restaurant.calculateOrderTotal(itemNames);
+        assertEquals(438, total);
+    }
+
+    @Test
+    public void calculate_order_total_with_invalid_item_name_should_throw_exception() {
+        restaurant.addToMenu("Sweet corn soup", 119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+
+        List<String> itemNames = new ArrayList<>();
+        itemNames.add("Sweet corn soup");
+        itemNames.add("French fries");
+
+        assertThrows(ItemNotFoundException.class, () -> restaurant.calculateOrderTotal(itemNames));
+    }
+
+    @Test
+    public void calculate_order_total_with_empty_list_should_return_zero() throws ItemNotFoundException {
+        restaurant.addToMenu("Sweet corn soup", 119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+
+        List<String> itemNames = new ArrayList<>();
+        int total = restaurant.calculateOrderTotal(itemNames);
+        assertEquals(0, total);
+    }
+
 }

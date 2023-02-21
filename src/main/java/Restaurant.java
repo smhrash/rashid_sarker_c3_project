@@ -26,10 +26,12 @@ public class Restaurant {
     }
 
     public LocalTime getCurrentTime() {
+
         return LocalTime.now();
     }
 
     public List<Item> getMenu() {
+
         return menu;
     }
 
@@ -61,10 +63,9 @@ public class Restaurant {
                 + "Opening time:" + openingTime + "\n"
                 + "Closing time:" + closingTime + "\n"
                 + "Menu:" + "\n" + getMenu());
-
     }
 
-    public String getName() {
+    public String getName()throws RestaurantNotFoundException {
         return name;
     }
 
