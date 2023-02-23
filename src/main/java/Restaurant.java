@@ -1,6 +1,5 @@
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Restaurant {
@@ -36,6 +35,14 @@ public class Restaurant {
         return menu;
     }
 
+    public List<String> getItemNames() {
+        List<String> itemNames = new ArrayList<String>();
+        for (Item item : menu) {
+            itemNames.add(item.getName());
+        }
+        return itemNames;
+    }
+
     private Item findItemByName(String itemName) {
         for (Item item : menu) {
             if (item.getName().equals(itemName))
@@ -63,7 +70,8 @@ public class Restaurant {
                 + "Location:" + location + "\n"
                 + "Opening time:" + openingTime + "\n"
                 + "Closing time:" + closingTime + "\n"
-                + "Menu:" + "\n" + getMenu());
+                + "Menu:" + "\n" + getMenu() + "\n"
+                + "TotalBill:" + calculateOrderTotal(getItemNames()));
 
     }
 
@@ -71,10 +79,16 @@ public class Restaurant {
         return name;
     }
 
-    public int calculateOrderTotal() throws ItemNotFoundException {
-       int total = 10;
+    public int calculateOrderTotal(List<String> itemNames) throws ItemNotFoundException {
+        int total = 0;
+        for (String itemName : itemNames) {
+            Item item = findItemByName(itemName);
+            if (item == null) {
+                throw new ItemNotFoundException(itemName);
+            }
+            total += item.getPrice();
+        }
         return total;
     }
-
 
 }
