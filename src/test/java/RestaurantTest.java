@@ -84,7 +84,7 @@ class RestaurantTest {
         itemNames.add("Sweet corn soup");
         itemNames.add("Sizzling brownie");
 
-        int total = restaurant.calculateOrderTotal(itemNames);
+        int total = restaurant.calculateOrderTotal();
         assertEquals(438, total);
     }
 
@@ -97,7 +97,7 @@ class RestaurantTest {
         itemNames.add("Sweet corn soup");
         itemNames.add("French fries");
 
-        assertThrows(ItemNotFoundException.class, () -> restaurant.calculateOrderTotal(itemNames));
+        assertThrows(ItemNotFoundException.class, () -> restaurant.calculateOrderTotal());
     }
 
     @Test
@@ -106,7 +106,7 @@ class RestaurantTest {
         restaurant.addToMenu("Vegetable lasagne", 269);
 
         List<String> itemNames = new ArrayList<>();
-        int total = restaurant.calculateOrderTotal(itemNames);
+        int total = restaurant.calculateOrderTotal();
         assertEquals(0, total);
     }
 

@@ -1,5 +1,6 @@
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Restaurant {
@@ -63,10 +64,17 @@ public class Restaurant {
                 + "Opening time:" + openingTime + "\n"
                 + "Closing time:" + closingTime + "\n"
                 + "Menu:" + "\n" + getMenu());
+
     }
 
-    public String getName()throws RestaurantNotFoundException {
+    public String getName() throws RestaurantNotFoundException {
         return name;
     }
+
+    public int calculateOrderTotal() throws ItemNotFoundException {
+       int total = 10;
+        return total;
+    }
+
 
 }
